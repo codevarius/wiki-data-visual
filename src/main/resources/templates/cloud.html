@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>wiki data science</title>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="css/styles.css"/>
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+<header th:replace="~{/fragments/topbar::bar(top20Active='top_nav_element_active', inputVisible=false)}"></header>
+<div id="chart_area"></div>
+<div id="graph_area"></div>
+<div id="alertBox">Wikipedia временно не отвечает. 😑</div>
+<script
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"
+></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuidv5.min.js"
+        integrity="sha512-DZF/MlPVW18bdFJMe5EgruZrU7UF7QzQvwDBSqy9Dl8vEoGQySMECf/WwNsb2c/zJrIhBI6xprdwfk6wlA3Fuw=="
+        crossorigin="anonymous"></script>
+<script src="js/pageviews_charts/controlPanel.js" defer async></script>
+<script src="js/pageviews_charts/chart.js" defer async></script>
+<script src="js/pageviews_cloud/cloudlogic.js" defer async></script>
+</body>
+</html>

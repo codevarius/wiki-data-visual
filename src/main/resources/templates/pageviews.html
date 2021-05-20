@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>wiki data science</title>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="css/styles.css"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style>
+        #chart_area {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<header th:replace="~{/fragments/topbar::bar(titleSearch='top_nav_element_active', inputVisible=true,pageSearchButtonVisible=true)}"></header>
+<div id="chart_area"></div>
+<script
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"
+></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<script src="js/pageviews_charts/controlPanel.js" defer async></script>
+<script src="js/pageviews_charts/chart.js" defer async></script>
+</body>
+</html>

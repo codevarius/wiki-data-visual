@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<header th:fragment="bar">
+    <div class="topnav">
+        <a style="display: none" th:class="${top20Active}" class="top_nav_element" href="/app/most-viewed-cloud">Топ 20 💎</a>
+        <a th:class="${titleSearch}" class="top_nav_element" href="/app/pageviews">Статьи 📃</a>
+        <a th:class="${categorySearch}" class="top_nav_element" href="/app/categories-cloud">Категории 🗂</a>
+        <input th:if="${inputVisible}" class="top_nav_search_element" id="search_input" type="text"
+               placeholder="поисковое слово">
+        <button th:if="${pageSearchButtonVisible}" class="top_nav_search_element" id="search_button">🔎</button>
+        <button th:if="${categoriesSearchButtonVisible}" class="top_nav_search_element" id="search_category_button">🔎</button>
+    </div>
+</header>
+</html>
