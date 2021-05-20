@@ -21,7 +21,7 @@ $("#search_category_button").click(function () {
     categorySearchPathCounter = 0;
     let categoryTitle = $.find("#search_input")[0].value;
     if (categoryTitle !== '') {
-        initCloud("/app/categories-cloud/data", categoryTitle, "POST");
+        initCloud("/categories-cloud/data", categoryTitle, "POST");
     }
 })
 
@@ -30,7 +30,7 @@ function requestPage(pageTitle) {
         chartTitlesAlreadyLoaded.push(pageTitle);
         $.ajax({
             type: "POST",
-            url: "/app/pageviews/add-page",
+            url: "/pageviews/add-page",
             data: pageTitle,
             contentType: "text/plain",
             success: function (response) {
@@ -93,9 +93,9 @@ function initCloud(requestUrl, categoryTitle, method) {
                     .attr('id', d => {
                         return d.title.includes('Категория:') ? d.title
                             .substr(10, d.title.length).replace(/\s+/g, '')
-                            .replace(/[:,.)('\s\/\\]+/g, '') + '_img_def'
+                            .replace(/[:,.!?№%^&*)('\s\/\\0-9]+/g, '') + '_img_def'
                             : d.title
-                            .replace(/[:,.)('\s\/\\]+/g, '') + '_img_def';
+                            .replace(/[:,.!?№%^&*)('\s\/\\0-9]+/g, '') + '_img_def';
                     })
                     .attr("x", d => {
                         return -d.circle_size / 1.2;
@@ -141,7 +141,7 @@ function initCloud(requestUrl, categoryTitle, method) {
                                     pathTextElement.remove();
                                 }
                             })
-                            initCloud("/app/categories-cloud/data", categoryTitle, "POST");
+                            initCloud("/categories-cloud/data", categoryTitle, "POST");
                         }
                     });
                 simulation.restart();
@@ -158,7 +158,7 @@ function handleNodeClick(node) {
     let nodeTitle = node.path[0].attributes.title.value
     if (nodeTitle.includes('Категория:')) {
         let newCat = nodeTitle.substr(10, nodeTitle.length);
-        initCloud("/app/categories-cloud/data", newCat, "POST");
+        initCloud("/categories-cloud/data", newCat, "POST");
         categorySearchPathCounter++;
     } else {
         requestPage(nodeTitle);

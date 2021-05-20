@@ -19,8 +19,8 @@ const svg = d3.select("#graph_area").append("svg")
     .attr("id", "cloud_view")
     .attr("viewBox", [-cloudWidth / 2, -cloudHeight / 2, cloudWidth, cloudHeight]);
 
-if (document.location.pathname === "/app/most-viewed-cloud") {
-    initCloud("/app/most-viewed-cloud/data", null, "GET");
+if (document.location.pathname === "/most-viewed-cloud") {
+    initCloud("/most-viewed-cloud/data", null, "GET");
 }
 
 let img_url = function (id) {
@@ -164,9 +164,9 @@ function addNodeToSimulation(targetNodeId) {
         wikinodes.push({
             id: cloudData[cloudLogicNodeCounter < 0 ? 0 : cloudLogicNodeCounter].title.includes('Категория:') ? cloudData[cloudLogicNodeCounter < 0 ? 0 : cloudLogicNodeCounter].title
                     .substr(10, cloudData[cloudLogicNodeCounter < 0 ? 0 : cloudLogicNodeCounter].title.length)
-                    .replace(/[:,.)('\s\/\\]+/g, '')
+                    .replace(/[:,.!?№%^&*)('\s\/\\0-9]+/g, '')
                 : cloudData[cloudLogicNodeCounter < 0 ? 0 : cloudLogicNodeCounter].title
-                    .replace(/[:,.)('\s\/\\]+/g, ''),
+                    .replace(/[:,.!?№%^&*)('\s\/\\0-9]+/g, ''),
             x,
             y,
             node: {
