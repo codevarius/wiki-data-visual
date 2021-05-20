@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Page {
@@ -28,10 +25,10 @@ public class Page {
     @JsonGetter("circle_size")
     public Integer getAvgPageViewsAsSizeOfSvg() {
         if (pageviews != null && !pageviews.isEmpty()) {
-            var nonNullPageviews = pageviews.values().stream()
+            List<Integer> nonNullPageviews = pageviews.values().stream()
                     .filter(Objects::nonNull)
                     .collect(Collectors.toCollection(ArrayList::new));
-            var result = Collections.max(nonNullPageviews);
+            Integer result = Collections.max(nonNullPageviews);
             return result > 150 ? 150 : Math.max(result, 80);
         }
         return 80;
