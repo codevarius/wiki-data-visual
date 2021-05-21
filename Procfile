@@ -1,1 +1,1 @@
-web: java -Dserver.port=80 -jar target/wiki-data-visual.jar
+web: java -Dserver.port=$PORT $JAVA_OPTS -jar target/wiki-data-visual.jar
