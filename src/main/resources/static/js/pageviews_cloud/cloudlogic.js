@@ -85,55 +85,11 @@ function renderVisual() {
                         }
                     )
                     .on('click', (d) => {
-                        d.stopPropagation();
-                        if (tapCount === 1) {
-                            handleNodeClick(d);
-                            tapCount = 0;
-                        } else {
-                            tapCount++;
-                        }
-
-                        if (d && tapCount === 1) {
-                            let title = d.currentTarget.attributes[6].value;
-                            let targetCircle = d3.select('#' + title);
-                            let wikinodeToResize = wikinodes.filter(value => value.node && (value.node.title === d.currentTarget.attributes[3].value));
-                            if (wikinodeToResize[0] != null) {
-                                if (wikinodeToResize.length > 0 && wikinodeToResize[0].node) {
-                                    wikinodeToResize[0].node.circleSize = 160;
-                                }
-                                let nodeImg = d3.select('#' + wikinodeToResize[0].id + '_img_def')
-                                    .attr("pointer-events", "none");
-                                nodeImg.classed("scaled_img_def", true)
-                                resetNodeX = nodeImg.attr('x');
-                                resetNodeY = nodeImg.attr('y');
-                                resetNodeWidth = nodeImg.attr('width');
-                                resetNodeHeight = nodeImg.attr('height');
-                                nodeImg.transition().duration(500)
-                                    .attr('width', nodeImg.attr('width') * 2)
-                                    .attr('height', nodeImg.attr('height') * 2)
-                                    .attr('x', -(nodeImg.data()[0].circle_size * 2) / 1.2)
-                                    .attr('y', -(nodeImg.data()[0].circle_size * 2) / 1.15)
-                                simulation.nodes(wikinodes);
-                                targetCircle
-                                    .transition()
-                                    .duration(500)
-                                    .attr('r', 160);
-                                let textLabel = d3.select('#' + wikinodeToResize[0].id + "_g")
-                                    .append("text")
-                                    .attr('y', -120)
-                                    .attr("pointer-events", "none")
-                                    .attr('id', wikinodeToResize[0].id + "_circle_text")
-                                    .style('fill', 'white')
-                                    .style('font-weight', 'bold')
-                                    .style('font-size', 36)
-                                    .style('font-family', '"Open Sans", sans-serif')
-                                wikinodeToResize[0].node.title.split(' ').forEach(value => {
-                                    textLabel.append("tspan")
-                                        .attr("x", -100)
-                                        .attr("dy", "1.5em")
-                                        .text(value.includes('Категория:') ? value.substr(10, value.length) : value);
-                                })
-                            }
+                        handleClickTouch(d);
+                    })
+                    .on('touchstart', (d) => {
+                        if (d.length <= 1) {
+                            handleClickTouch(d);
                         }
                     })
                     .transition()
@@ -189,4 +145,56 @@ function addNodeToSimulation(targetNodeId) {
 function clearExitedNodes() {
     let svgToRemove = d3.selectAll(".exit");
     svgToRemove.remove();
+}
+
+function handleClickTouch(d) {
+    if (tapCount === 1) {
+        handleNodeClick(d);
+        tapCount = 0;
+    } else {
+        tapCount++;
+    }
+
+    if (d && tapCount === 1) {
+        let title = d.currentTarget.attributes[6].value;
+        let targetCircle = d3.select('#' + title);
+        let wikinodeToResize = wikinodes.filter(value => value.node && (value.node.title === d.currentTarget.attributes[3].value));
+        if (wikinodeToResize[0] != null) {
+            if (wikinodeToResize.length > 0 && wikinodeToResize[0].node) {
+                wikinodeToResize[0].node.circleSize = 160;
+            }
+            let nodeImg = d3.select('#' + wikinodeToResize[0].id + '_img_def')
+                .attr("pointer-events", "none");
+            nodeImg.classed("scaled_img_def", true)
+            resetNodeX = nodeImg.attr('x');
+            resetNodeY = nodeImg.attr('y');
+            resetNodeWidth = nodeImg.attr('width');
+            resetNodeHeight = nodeImg.attr('height');
+            nodeImg.transition().duration(500)
+                .attr('width', nodeImg.attr('width') * 2)
+                .attr('height', nodeImg.attr('height') * 2)
+                .attr('x', -(nodeImg.data()[0].circle_size * 2) / 1.2)
+                .attr('y', -(nodeImg.data()[0].circle_size * 2) / 1.15)
+            simulation.nodes(wikinodes);
+            targetCircle
+                .transition()
+                .duration(500)
+                .attr('r', 160);
+            let textLabel = d3.select('#' + wikinodeToResize[0].id + "_g")
+                .append("text")
+                .attr('y', -120)
+                .attr("pointer-events", "none")
+                .attr('id', wikinodeToResize[0].id + "_circle_text")
+                .style('fill', 'white')
+                .style('font-weight', 'bold')
+                .style('font-size', 36)
+                .style('font-family', '"Open Sans", sans-serif')
+            wikinodeToResize[0].node.title.split(' ').forEach(value => {
+                textLabel.append("tspan")
+                    .attr("x", -100)
+                    .attr("dy", "1.5em")
+                    .text(value.includes('Категория:') ? value.substr(10, value.length) : value);
+            })
+        }
+    }
 }
