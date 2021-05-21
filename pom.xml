@@ -31,7 +31,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    <packaging>jar</packaging>
     <build>
         <finalName>wiki-data-visual</finalName>
         <plugins>
